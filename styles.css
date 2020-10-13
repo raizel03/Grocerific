@@ -1,0 +1,7 @@
+.navbar{
+    color: black;
+}
+
+#successmsg, #updatemsg, #deletemsg{
+    color: green;
+}

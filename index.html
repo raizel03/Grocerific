@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grocerific</title>
+
+  <!--jQuery CDN-->
+  <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+  <!--Javascript-->
+  <script src="scripts.js" type="text/javascript"></script>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <!--Navbar-->
+    <nav class="navbar navbar-default navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Grocerific Online
+          </a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+      
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="navbar-nav ml-auto">
+          <li class="active"><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!--Inventory table-->
+    <div class="row col-xs-12">
+      <form id="inventoryManagement">
+        <div class="col-12">
+          <div class="pull-left">
+            <h4 class="text-primary">Inventory Management</h4>
+          </div>
+          <div class="pull-right">
+            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addModal">
+              <span class="glyphicon glyphicon-plus"></span> Add New Product
+            </button>
+          </div>
+        </div>
+
+        <!--Table-->
+        <table id="productList" class="table-bordered" width="100%">
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Size</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </table>
+      </form>
+
+    </div>
+  </div>
+
+  <!--Modal to add products-->
+  <div id="addModal" class="modal bs-example-modal-sm" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Add Product</h4>
+        </div>
+
+        <div class="modal-body">
+          <label>Description</label>
+          <input type="text" id="txtDescription" class="form-control"><br/>
+          <label>Size</label>
+          <input type="text" id="txtSize" class="form-control"><br/>
+          <label>Price</label>
+          <input type="number" id="txtPrice" class="form-control"><br/>
+        </div>
+
+        <div class="modal-footer">
+          <span id="addmsg"></span>
+          <button type="button" class="btn btn-success" id="btnAdd">Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal to edit products-->
+  <div id="updateModal" class="modal bs-example-modal-sm" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Edit Product</h4>
+        </div>
+
+        <div class="modal-body">
+          <label>ID</label>
+          <input type="text" id="updateID" class="form-control" disabled><br/>
+          <label>Description</label>
+          <input type="text" id="updateDesc" class="form-control"><br/>
+          <label>Size</label>
+          <input type="text" id="updateSize" class="form-control"><br/>
+          <label>Price</label>
+          <input type="number" id="updatePrice" class="form-control"><br/>
+        </div>
+
+        <div class="modal-footer">
+          <span id="updatemsg"></span>
+          <button type="button" class="btn btn-success" id="btnUpdate">Update</button>
+          <button type="button" class="btn btn-default" id="btnExitUpdate" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal to delete products-->
+  <div id="deleteModal" class="modal bs-example-modal-sm" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Are you sure you want to delete this item?</h5>
+        </div>
+
+        <div class="modal-body">
+          <label>ID</label>
+          <input type="text" id="delID" class="form-control" disabled><br/>
+          <label>Description</label>
+          <input type="text" id="delDescription" class="form-control" disabled><br/>
+        </div>
+
+        <div class="modal-footer">
+          <span id="deletemsg"></span>
+          <button type="button" class="btn btn-danger" id="btnDelete">Delete</button>
+          <button type="button" class="btn btn-default" id="btnExitDelete" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
